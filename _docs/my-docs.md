@@ -4,6 +4,7 @@ nav_order: 1
 has_children: true
 layout: default
 ---
+{% include toc.md %}
 
 ## My Jekyll automation
 
