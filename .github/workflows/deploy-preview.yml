@@ -23,9 +23,10 @@ jobs:
 
       - name: Install Jekyll and Just the Docs
         run: |
-          gem install jekyll:4.3.2 bundler:2.4.22 jekyll-remote-theme:0.4.3
+          gem install jekyll:4.3.2 bundler:2.4.22 jekyll-remote-theme:0.4.3 jekyll-sass-converter:3.0.0
           jekyll build --config _config.yml,_config_preview.yml -d _site
           touch _site/.nojekyll
+
 
       - name: Deploy to gh-pages/preview/
         uses: peaceiris/actions-gh-pages@v4
