@@ -1,7 +1,11 @@
 ---
 title: My docs and findings
+nav_order: 1
+has_children: true
 layout: default
 ---
+{% include toc.md %}
+
 ## My Jekyll automation
 
 ### 1. Sukurkite GitHub repozitoriją pavadinimu `my-docs`

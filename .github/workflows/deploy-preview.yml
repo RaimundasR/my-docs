@@ -19,15 +19,17 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
+          bundler: "2.4.22"
           bundler-cache: true
 
-      - name: Install Jekyll + minima and build
-        run: |
-          gem install jekyll:4.3.2 bundler:2.4.22 minima:2.5.1 jekyll-remote-theme:0.4.3 jekyll-sass-converter:3.0.0
-          echo "theme: minima" > _config_theme.yml
-          jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml -d _site
-          touch _site/.nojekyll
 
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Build site with preview config
+        run: |
+          bundle exec jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml -d _site
+          touch _site/.nojekyll
 
       - name: Deploy to gh-pages/preview/
         uses: peaceiris/actions-gh-pages@v4
