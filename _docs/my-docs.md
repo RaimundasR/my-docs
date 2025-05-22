@@ -204,7 +204,7 @@ jobs:
           name: Docs ${{ github.event.inputs.version }}
           body: |
             🗂️ View the documentation at:
-            👉 https://<user_name>.github.io/my-docs/${{ github.event.inputs.version }}/
+            👉 https://<your_suer_name>.github.io/my-docs/${{ github.event.inputs.version }}/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
