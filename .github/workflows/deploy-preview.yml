@@ -23,12 +23,10 @@ jobs:
 
       - name: Install Jekyll + minima and build
         run: |
-          gem install jekyll -v 4.3.2 bundler -v 2.4.22 minima -v 2.5.1 jekyll-remote-theme -v 0.4.3 jekyll-sass-converter -v 3.0.0
+          gem install jekyll:4.3.2 bundler:2.4.22 minima:2.5.1 jekyll-remote-theme:0.4.3 jekyll-sass-converter:3.0.0
           echo "baseurl: \"/test-docs/preview\"" > _config_preview.yml
           jekyll build --config _config.yml,_config_preview.yml -d _site
           touch _site/.nojekyll
-
-
 
       - name: Deploy to gh-pages/preview/
         uses: peaceiris/actions-gh-pages@v4

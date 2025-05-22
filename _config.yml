@@ -1,9 +1,9 @@
 title: My Docs Site
 remote_theme: jekyll/minima
-markdown: kramdown
-
 plugins:
   - jekyll-remote-theme
+
+markdown: kramdown
 
 collections:
   docs:
