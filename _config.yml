@@ -1,0 +1,15 @@
+title: My Docs Site
+theme: minima
+markdown: kramdown
+
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: docs
+    values:
+      layout: default

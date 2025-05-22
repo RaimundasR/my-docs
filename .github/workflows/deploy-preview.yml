@@ -1,0 +1,42 @@
+name: Deploy Preview (develop)
+
+on:
+  push:
+    branches: [develop]
+
+permissions:
+  contents: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
+      - name: Install Jekyll + minima and build
+        run: |
+          gem install jekyll bundler minima
+          echo "theme: minima" > _config_theme.yml
+          echo "baseurl: \"/test-docs/preview\"" > _config_preview.yml
+          jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml -d _site && touch _site/.nojekyll
+          touch _site/.nojekyll
+
+      - name: Deploy to gh-pages/preview/
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./_site
+          destination_dir: preview
+
+      - name: If you would like to check Preview URL
+        run: echo "::notice title=Preview URL::🔗 https://raimundasr.github.io/test-docs/preview/"
+
