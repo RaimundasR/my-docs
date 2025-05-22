@@ -1,10 +1,10 @@
 ---
 title: My docs and findings
-layout: default
-
 nav_order: 1
-layout: page
+layout: default
+has_children: true
 ---
+
 ## My Jekyll automation
 
 ### 1. Sukurkite GitHub repozitoriją pavadinimu `my-docs`
