@@ -136,7 +136,7 @@ jobs:
 {% endraw %}
 
 #### `.github/workflows/release-docs.yml`
-
+{% raw %}
 ```yaml
 name: Manual Doc Release
 
@@ -208,7 +208,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 ```
-
+{% endraw %}
 ---
 
 ### 4. Sukurkite ir sukonfigūruokite GitHub šakas
