@@ -81,11 +81,18 @@ jobs:
           ruby-version: '3.1'
           bundler-cache: true
 
+      - name: Create _config_release.yml with dynamic baseurl
+        run: |
+          cat <<EOF > _config_release.yml
+          baseurl: "/my-docs/${{ github.event.inputs.version }}"
+          EOF
+
+
       - name: Install Jekyll and minima theme
         run: |
           gem install jekyll bundler minima
           echo "theme: minima" > _config_theme.yml
-          jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site
+          jekyll build --config _config.yml,_config_theme.yml -d _site
           touch _site/.nojekyll
 
       - name: Deploy to /${{ github.event.inputs.version }}/
