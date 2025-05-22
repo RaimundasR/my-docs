@@ -94,6 +94,7 @@ baseurl: "/my-docs/doc-0.0.1"
 
 #### `.github/workflows/deploy-preview.yml`
 
+{% raw %}
 ```yaml
 name: Deploy Preview (develop)
 
@@ -132,10 +133,10 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./_site
           destination_dir: preview
-```
+{% endraw %}
 
 #### `.github/workflows/release-docs.yml`
-
+{% raw %}
 ```yaml
 name: Manual Doc Release
 
@@ -163,10 +164,13 @@ jobs:
           ruby-version: '3.1'
           bundler-cache: true
 
-      - name: Install Jekyll + minima and build
+      - name: Install Jekyll and minima theme
         run: |
-          gem install jekyll:4.3.2 bundler:2.4.22 minima:2.5.1 jekyll-remote-theme:0.4.3 jekyll-sass-converter:3.0.0
+          gem install jekyll bundler minima
           echo "theme: minima" > _config_theme.yml
+          cat <<EOF > _config_release.yml
+          baseurl: "/my-docs/${{ github.event.inputs.version }}"
+          EOF
           jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site
           touch _site/.nojekyll
 
@@ -191,8 +195,20 @@ jobs:
           publish_dir: ./redirect
           destination_dir: .
           keep_files: true
-```
 
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          name: Docs ${{ github.event.inputs.version }}
+          body: |
+            🗂️ View the documentation at:
+            👉 https://<your_suer_name>.github.io/my-docs/${{ github.event.inputs.version }}/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+```
+{% endraw %}
 ---
 
 ### 4. Sukurkite ir sukonfigūruokite GitHub šakas
