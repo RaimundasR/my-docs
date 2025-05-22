@@ -1,14 +1,13 @@
 title: My Docs Site
-remote_theme: jekyll/minima
-plugins:
-  - jekyll-remote-theme
-
+theme: minima
 markdown: kramdown
 
 collections:
   docs:
     output: true
     permalink: /:collection/:name/
+
+    
 
 defaults:
   - scope:
