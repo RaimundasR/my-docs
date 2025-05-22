@@ -1,6 +1,9 @@
 ---
 title: My docs and findings
 layout: default
+
+nav_order: 1
+layout: page
 ---
 ## My Jekyll automation
 
