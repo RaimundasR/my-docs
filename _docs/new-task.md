@@ -1,4 +1,4 @@
----
+<!-- ---
 title: My docs and findings
 layout: default
 ---
@@ -40,4 +40,4 @@ Jei norėsite papildomai:
 * Reikalauti **peržiūrėto PR** (code review)
 * Leisti **auto-merge** arba **auto-approve** tam tikriems naudotojams ar botams
 
-duok ženklą — padėsiu sukonfigūruoti!
+duok ženklą — padėsiu sukonfigūruoti! -->
