@@ -1,5 +1,5 @@
 title: My Docs Site
-theme: minima
+remote_theme: jekyll/minima
 markdown: kramdown
 
 collections:
