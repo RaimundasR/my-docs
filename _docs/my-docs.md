@@ -125,6 +125,7 @@ jobs:
           jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml -d _site
           touch _site/.nojekyll
 
+
       - name: Deploy to gh-pages/preview/
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -132,11 +133,69 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./_site
           destination_dir: preview
+
 ```
 
 #### `.github/workflows/release-docs.yml`
 
 ```yaml
+# name: Manual Doc Release
+
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       version:
+#         description: 'Release folder (e.g., doc-0.0.1)'
+#         required: true
+
+# permissions:
+#   contents: write
+
+# jobs:
+#   build-and-release:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout source
+#         uses: actions/checkout@v4
+
+#       - name: Set up Ruby
+#         uses: ruby/setup-ruby@v1
+#         with:
+#           ruby-version: '3.1'
+#           bundler-cache: true
+
+#       - name: Install Jekyll and minima theme
+#         run: |
+#           gem install jekyll bundler minima
+#           echo "theme: minima" > _config_theme.yml
+#           echo "baseurl: \"/test-docs/${{ github.event.inputs.version }}\"" > _config_release.yml
+#           jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site
+#           touch _site/.nojekyll
+
+#       - name: Deploy to /${{ github.event.inputs.version }}/
+#         uses: peaceiris/actions-gh-pages@v4
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           publish_branch: gh-pages
+#           publish_dir: ./_site
+#           destination_dir: ${{ github.event.inputs.version }}
+
+#       - name: Generate root redirect to latest version
+#         run: |
+#           mkdir redirect
+#           echo '<meta http-equiv="refresh" content="0; url=./${{ github.event.inputs.version }}/">' > redirect/index.html
+
+#       - name: Deploy redirect index.html to root (preserve /preview/)
+#         uses: peaceiris/actions-gh-pages@v4
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           publish_branch: gh-pages
+#           publish_dir: ./redirect
+#           destination_dir: .
+#           keep_files: true
+
+
 name: Manual Doc Release
 
 on:
@@ -163,10 +222,13 @@ jobs:
           ruby-version: '3.1'
           bundler-cache: true
 
-      - name: Install Jekyll + minima and build
+      - name: Install Jekyll and minima theme
         run: |
-          gem install jekyll:4.3.2 bundler:2.4.22 minima:2.5.1 jekyll-remote-theme:0.4.3 jekyll-sass-converter:3.0.0
+          gem install jekyll bundler minima
           echo "theme: minima" > _config_theme.yml
+          cat <<EOF > _config_release.yml
+          baseurl: "/my-docs/${{ github.event.inputs.version }}"
+          EOF
           jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site
           touch _site/.nojekyll
 
@@ -191,6 +253,18 @@ jobs:
           publish_dir: ./redirect
           destination_dir: .
           keep_files: true
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          name: Docs ${{ github.event.inputs.version }}
+          body: |
+            🗂️ View the documentation at:
+            👉 https://raimundasr.github.io/my-docs/${{ github.event.inputs.version }}/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 ```
 
 ---
