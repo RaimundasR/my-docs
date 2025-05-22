@@ -7,15 +7,15 @@
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="My docs and findings" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="My findings goes here :" />
-<meta property="og:description" content="My findings goes here :" />
+<meta name="description" content="My Jekyll automation" />
+<meta property="og:description" content="My Jekyll automation" />
 <meta property="og:site_name" content="My Docs Site" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-05-22T13:35:21+00:00" />
+<meta property="article:published_time" content="2025-05-22T13:36:46+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="My docs and findings" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-22T13:35:21+00:00","datePublished":"2025-05-22T13:35:21+00:00","description":"My findings goes here :","headline":"My docs and findings","mainEntityOfPage":{"@type":"WebPage","@id":"/my-docs/preview/docs/my-docs/"},"url":"/my-docs/preview/docs/my-docs/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-22T13:36:46+00:00","datePublished":"2025-05-22T13:36:46+00:00","description":"My Jekyll automation","headline":"My docs and findings","mainEntityOfPage":{"@type":"WebPage","@id":"/my-docs/preview/docs/my-docs/"},"url":"/my-docs/preview/docs/my-docs/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/my-docs/preview/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/my-docs/preview/feed.xml" title="My Docs Site" /></head>
 <body><header class="site-header" role="banner">
@@ -35,11 +35,258 @@
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <h1 id="my-findings-goes-here-">My findings goes here :</h1>
+        <h2 id="my-jekyll-automation">My Jekyll automation</h2>
+
+<h3 id="1-sukurkite-github-repozitoriją-pavadinimu-my-docs">1. Sukurkite GitHub repozitoriją pavadinimu <code class="language-plaintext highlighter-rouge">my-docs</code></h3>
+
+<ol>
+  <li>Nueikite į GitHub ir sukurkite naują repozitoriją: <code class="language-plaintext highlighter-rouge">my-docs</code></li>
+  <li>Tiesiai GitHub’e pridėkite failą <code class="language-plaintext highlighter-rouge">readme.md</code> su turiniu:</li>
+</ol>
+
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gu">## My Jekyll automation</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="2-nusiklonuokite-repozitoriją-lokaliai-ir-susikurkite-šiuos-failus-ir-struktūra">2. Nusiklonuokite repozitoriją lokaliai ir susikurkite šiuos failus ir struktūra:</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span>
+├── _config_preview.yml
+├── _config_release.yml
+├── _config_theme.yml
+├── _config.yml
+├── _docs
+│   └── my-docs.md
+├── index.md
+└── readme.md
+</code></pre></div></div>
+
+<h4 id="my-docsmd"><code class="language-plaintext highlighter-rouge">my-docs.md</code></h4>
+
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">My docs</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">default</span>
+<span class="nn">---</span>
+<span class="gh"># Mano dokumentacija</span>
+</code></pre></div></div>
+
+<h4 id="indexmd"><code class="language-plaintext highlighter-rouge">index.md</code></h4>
+
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">default</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Welcome</span>
+<span class="nn">---</span>
+
+<span class="p">-</span> <span class="p">[</span><span class="nv">My docs</span><span class="p">](</span><span class="sx">/my-docs/preview/docs/my-docs/</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="_configyml"><code class="language-plaintext highlighter-rouge">_config.yml</code></h4>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">My Docs Site</span>
+<span class="na">theme</span><span class="pi">:</span> <span class="s">minima</span>
+<span class="na">markdown</span><span class="pi">:</span> <span class="s">kramdown</span>
+
+<span class="na">collections</span><span class="pi">:</span>
+  <span class="na">docs</span><span class="pi">:</span>
+    <span class="na">output</span><span class="pi">:</span> <span class="kc">true</span>
+    <span class="na">permalink</span><span class="pi">:</span> <span class="s">/:collection/:name/</span>
+
+<span class="na">defaults</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">scope</span><span class="pi">:</span>
+      <span class="na">path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+      <span class="na">type</span><span class="pi">:</span> <span class="s">docs</span>
+    <span class="na">values</span><span class="pi">:</span>
+      <span class="na">layout</span><span class="pi">:</span> <span class="s">default</span>
+</code></pre></div></div>
+
+<h4 id="_config_themeyml"><code class="language-plaintext highlighter-rouge">_config_theme.yml</code></h4>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">theme</span><span class="pi">:</span> <span class="s">minima</span>
+</code></pre></div></div>
+
+<h4 id="_config_previewyml"><code class="language-plaintext highlighter-rouge">_config_preview.yml</code></h4>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">baseurl</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/my-docs/preview"</span>
+</code></pre></div></div>
+
+<h4 id="_config_releaseyml"><code class="language-plaintext highlighter-rouge">_config_release.yml</code></h4>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">baseurl</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/my-docs/doc-0.0.1"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="3-sukurkite-workflow-failus">3. Sukurkite workflow failus:</h3>
+
+<h4 id="githubworkflowsdeploy-previewyml"><code class="language-plaintext highlighter-rouge">.github/workflows/deploy-preview.yml</code></h4>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Deploy Preview (develop)</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">develop</span><span class="pi">]</span>
+
+<span class="na">permissions</span><span class="pi">:</span>
+  <span class="na">contents</span><span class="pi">:</span> <span class="s">write</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">preview</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout code</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Ruby</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">ruby/setup-ruby@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">ruby-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.1'</span>
+          <span class="na">bundler-cache</span><span class="pi">:</span> <span class="kc">true</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Jekyll + minima and build</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">gem install jekyll:4.3.2 bundler:2.4.22 minima:2.5.1 jekyll-remote-theme:0.4.3 jekyll-sass-converter:3.0.0</span>
+          <span class="s">echo "theme: minima" &gt; _config_theme.yml</span>
+          <span class="s">jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml -d _site</span>
+          <span class="s">touch _site/.nojekyll</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Deploy to gh-pages/preview/</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">peaceiris/actions-gh-pages@v4</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">github_token</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">publish_branch</span><span class="pi">:</span> <span class="s">gh-pages</span>
+          <span class="na">publish_dir</span><span class="pi">:</span> <span class="s">./_site</span>
+          <span class="na">destination_dir</span><span class="pi">:</span> <span class="s">preview</span>
+</code></pre></div></div>
+
+<h4 id="githubworkflowsrelease-docsyml"><code class="language-plaintext highlighter-rouge">.github/workflows/release-docs.yml</code></h4>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Manual Doc Release</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">workflow_dispatch</span><span class="pi">:</span>
+    <span class="na">inputs</span><span class="pi">:</span>
+      <span class="na">version</span><span class="pi">:</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Release</span><span class="nv"> </span><span class="s">folder</span><span class="nv"> </span><span class="s">(e.g.,</span><span class="nv"> </span><span class="s">doc-0.0.1)'</span>
+        <span class="na">required</span><span class="pi">:</span> <span class="kc">true</span>
+
+<span class="na">permissions</span><span class="pi">:</span>
+  <span class="na">contents</span><span class="pi">:</span> <span class="s">write</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build-and-release</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout source</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Ruby</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">ruby/setup-ruby@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">ruby-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.1'</span>
+          <span class="na">bundler-cache</span><span class="pi">:</span> <span class="kc">true</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Jekyll + minima and build</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">gem install jekyll:4.3.2 bundler:2.4.22 minima:2.5.1 jekyll-remote-theme:0.4.3 jekyll-sass-converter:3.0.0</span>
+          <span class="s">echo "theme: minima" &gt; _config_theme.yml</span>
+          <span class="s">jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site</span>
+          <span class="s">touch _site/.nojekyll</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Deploy to /$/</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">peaceiris/actions-gh-pages@v4</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">github_token</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">publish_branch</span><span class="pi">:</span> <span class="s">gh-pages</span>
+          <span class="na">publish_dir</span><span class="pi">:</span> <span class="s">./_site</span>
+          <span class="na">destination_dir</span><span class="pi">:</span> <span class="s">$</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Generate root redirect to latest version</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">mkdir redirect</span>
+          <span class="s">echo '&lt;meta http-equiv="refresh" content="0; url=./$/"&gt;' &gt; redirect/index.html</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Deploy redirect index.html to root (preserve /preview/)</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">peaceiris/actions-gh-pages@v4</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">github_token</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">publish_branch</span><span class="pi">:</span> <span class="s">gh-pages</span>
+          <span class="na">publish_dir</span><span class="pi">:</span> <span class="s">./redirect</span>
+          <span class="na">destination_dir</span><span class="pi">:</span> <span class="s">.</span>
+          <span class="na">keep_files</span><span class="pi">:</span> <span class="kc">true</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="4-sukurkite-ir-sukonfigūruokite-github-šakas">4. Sukurkite ir sukonfigūruokite GitHub šakas</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> master
+git push <span class="nt">-u</span> origin master
+</code></pre></div></div>
+
+<p>Tada GitHub nustatymuose:</p>
 
 <ul>
-  <li>ok, so…..</li>
+  <li>Nustatykite <code class="language-plaintext highlighter-rouge">master</code> kaip default branch (vietoje <code class="language-plaintext highlighter-rouge">main</code>)</li>
 </ul>
+
+<p>Tada:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> develop
+git push <span class="nt">-u</span> origin develop
+</code></pre></div></div>
+
+<ul>
+  <li>Patikrinkite, ar veikia <code class="language-plaintext highlighter-rouge">Deploy Preview</code> workflow.</li>
+</ul>
+
+<hr />
+
+<h3 id="5-atlikite-pr-ir-leidimą">5. Atlikite PR ir leidimą</h3>
+
+<ol>
+  <li>Atidarykite PR iš <code class="language-plaintext highlighter-rouge">develop</code> į <code class="language-plaintext highlighter-rouge">master</code> ir atlikite merge</li>
+  <li>Paleiskite <code class="language-plaintext highlighter-rouge">Manual Doc Release</code> workflow su release numeriu: <code class="language-plaintext highlighter-rouge">doc-0.0.0</code></li>
+  <li>Nustatykite GitHub Pages: <code class="language-plaintext highlighter-rouge">gh-pages</code> branch ir <code class="language-plaintext highlighter-rouge">/</code> kaip root directory</li>
+</ol>
+
+<hr />
+
+<h3 id="6-testuokite-publikavimą">6. Testuokite publikavimą</h3>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">develop</code> branch’e redaguokite <code class="language-plaintext highlighter-rouge">my-docs.md</code></li>
+  <li>Padarykite <code class="language-plaintext highlighter-rouge">commit</code> ir <code class="language-plaintext highlighter-rouge">push</code></li>
+  <li>Atlikite PR iš <code class="language-plaintext highlighter-rouge">develop</code> į <code class="language-plaintext highlighter-rouge">master</code></li>
+  <li>Vėl paleiskite <code class="language-plaintext highlighter-rouge">Manual Doc Release</code> su release numeriu <code class="language-plaintext highlighter-rouge">doc-0.0.1</code></li>
+</ol>
+
+<hr />
+
+<h3 id="7-peržiūrėkite-puslapius">7. Peržiūrėkite puslapius:</h3>
+
+<ul>
+  <li>
+    <p>Peržiūrai (preview):</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><a href="https://your_username.github.io/my-docs/preview/">https://your_username.github.io/my-docs/preview/</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+- Versijai (release):
+</code></pre></div></div>
+
+<p><a href="https://your_username.github.io/my-docs/doc-0.0.1/">https://your_username.github.io/my-docs/doc-0.0.1/</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Sėkmės automatizuojant dokumentaciją! ✨
+
+</code></pre></div></div>
 
 
       </div>
