@@ -21,9 +21,9 @@ jobs:
           ruby-version: '3.1'
           bundler-cache: true
 
-      - name: Install Jekyll + minima and build
+      - name: Install Jekyll + minima and remote_theme plugin, then build
         run: |
-          gem install jekyll bundler minima
+          gem install jekyll bundler minima jekyll-remote-theme
           echo "theme: minima" > _config_theme.yml
           echo "baseurl: \"/test-docs/preview\"" > _config_preview.yml
           jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml -d _site
@@ -36,4 +36,3 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./_site
           destination_dir: preview
-
