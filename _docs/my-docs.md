@@ -133,6 +133,7 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./_site
           destination_dir: preview
+```
 {% endraw %}
 
 #### `.github/workflows/release-docs.yml`
