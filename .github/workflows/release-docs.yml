@@ -85,7 +85,6 @@ jobs:
         run: |
           gem install jekyll bundler minima
           echo "theme: minima" > _config_theme.yml
-          echo "baseurl: \"/test-docs/${{ github.event.inputs.version }}\"" > _config_release.yml
           jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site
           touch _site/.nojekyll
 
