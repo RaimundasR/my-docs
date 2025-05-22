@@ -11,11 +11,11 @@
 <meta property="og:description" content="My Jekyll automation" />
 <meta property="og:site_name" content="My Docs Site" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-05-22T14:47:26+00:00" />
+<meta property="article:published_time" content="2025-05-22T15:00:38+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="My docs and findings" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-22T14:47:26+00:00","datePublished":"2025-05-22T14:47:26+00:00","description":"My Jekyll automation","headline":"My docs and findings","mainEntityOfPage":{"@type":"WebPage","@id":"/my-docs/preview/docs/my-docs/"},"url":"/my-docs/preview/docs/my-docs/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-22T15:00:38+00:00","datePublished":"2025-05-22T15:00:38+00:00","description":"My Jekyll automation","headline":"My docs and findings","mainEntityOfPage":{"@type":"WebPage","@id":"/my-docs/preview/docs/my-docs/"},"url":"/my-docs/preview/docs/my-docs/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/my-docs/preview/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/my-docs/preview/feed.xml" title="My Docs Site" /></head>
 <body><header class="site-header" role="banner">
@@ -151,6 +151,7 @@
           <span class="s">jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml -d _site</span>
           <span class="s">touch _site/.nojekyll</span>
 
+
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Deploy to gh-pages/preview/</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">peaceiris/actions-gh-pages@v4</span>
         <span class="na">with</span><span class="pi">:</span>
@@ -158,11 +159,69 @@
           <span class="na">publish_branch</span><span class="pi">:</span> <span class="s">gh-pages</span>
           <span class="na">publish_dir</span><span class="pi">:</span> <span class="s">./_site</span>
           <span class="na">destination_dir</span><span class="pi">:</span> <span class="s">preview</span>
+
 </code></pre></div></div>
 
 <h4 id="githubworkflowsrelease-docsyml"><code class="language-plaintext highlighter-rouge">.github/workflows/release-docs.yml</code></h4>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Manual Doc Release</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># name: Manual Doc Release</span>
+
+<span class="c1"># on:</span>
+<span class="c1">#   workflow_dispatch:</span>
+<span class="c1">#     inputs:</span>
+<span class="c1">#       version:</span>
+<span class="c1">#         description: 'Release folder (e.g., doc-0.0.1)'</span>
+<span class="c1">#         required: true</span>
+
+<span class="c1"># permissions:</span>
+<span class="c1">#   contents: write</span>
+
+<span class="c1"># jobs:</span>
+<span class="c1">#   build-and-release:</span>
+<span class="c1">#     runs-on: ubuntu-latest</span>
+
+<span class="c1">#     steps:</span>
+<span class="c1">#       - name: Checkout source</span>
+<span class="c1">#         uses: actions/checkout@v4</span>
+
+<span class="c1">#       - name: Set up Ruby</span>
+<span class="c1">#         uses: ruby/setup-ruby@v1</span>
+<span class="c1">#         with:</span>
+<span class="c1">#           ruby-version: '3.1'</span>
+<span class="c1">#           bundler-cache: true</span>
+
+<span class="c1">#       - name: Install Jekyll and minima theme</span>
+<span class="c1">#         run: |</span>
+<span class="c1">#           gem install jekyll bundler minima</span>
+<span class="c1">#           echo "theme: minima" &gt; _config_theme.yml</span>
+<span class="c1">#           echo "baseurl: \"/test-docs/$\"" &gt; _config_release.yml</span>
+<span class="c1">#           jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site</span>
+<span class="c1">#           touch _site/.nojekyll</span>
+
+<span class="c1">#       - name: Deploy to /$/</span>
+<span class="c1">#         uses: peaceiris/actions-gh-pages@v4</span>
+<span class="c1">#         with:</span>
+<span class="c1">#           github_token: $</span>
+<span class="c1">#           publish_branch: gh-pages</span>
+<span class="c1">#           publish_dir: ./_site</span>
+<span class="c1">#           destination_dir: $</span>
+
+<span class="c1">#       - name: Generate root redirect to latest version</span>
+<span class="c1">#         run: |</span>
+<span class="c1">#           mkdir redirect</span>
+<span class="c1">#           echo '&lt;meta http-equiv="refresh" content="0; url=./$/"&gt;' &gt; redirect/index.html</span>
+
+<span class="c1">#       - name: Deploy redirect index.html to root (preserve /preview/)</span>
+<span class="c1">#         uses: peaceiris/actions-gh-pages@v4</span>
+<span class="c1">#         with:</span>
+<span class="c1">#           github_token: $</span>
+<span class="c1">#           publish_branch: gh-pages</span>
+<span class="c1">#           publish_dir: ./redirect</span>
+<span class="c1">#           destination_dir: .</span>
+<span class="c1">#           keep_files: true</span>
+
+
+<span class="na">name</span><span class="pi">:</span> <span class="s">Manual Doc Release</span>
 
 <span class="na">on</span><span class="pi">:</span>
   <span class="na">workflow_dispatch</span><span class="pi">:</span>
@@ -188,10 +247,13 @@
           <span class="na">ruby-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.1'</span>
           <span class="na">bundler-cache</span><span class="pi">:</span> <span class="kc">true</span>
 
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Jekyll + minima and build</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Jekyll and minima theme</span>
         <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">gem install jekyll:4.3.2 bundler:2.4.22 minima:2.5.1 jekyll-remote-theme:0.4.3 jekyll-sass-converter:3.0.0</span>
+          <span class="s">gem install jekyll bundler minima</span>
           <span class="s">echo "theme: minima" &gt; _config_theme.yml</span>
+          <span class="s">cat &lt;&lt;EOF &gt; _config_release.yml</span>
+          <span class="s">baseurl: "/my-docs/$"</span>
+          <span class="s">EOF</span>
           <span class="s">jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site</span>
           <span class="s">touch _site/.nojekyll</span>
 
@@ -216,6 +278,18 @@
           <span class="na">publish_dir</span><span class="pi">:</span> <span class="s">./redirect</span>
           <span class="na">destination_dir</span><span class="pi">:</span> <span class="s">.</span>
           <span class="na">keep_files</span><span class="pi">:</span> <span class="kc">true</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Publish GitHub Release</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">softprops/action-gh-release@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">tag_name</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">Docs $</span>
+          <span class="na">body</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="s">🗂️ View the documentation at:</span>
+            <span class="s">👉 https://raimundasr.github.io/my-docs/$/</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
+
 </code></pre></div></div>
 
 <hr />
