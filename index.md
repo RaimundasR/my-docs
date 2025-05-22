@@ -3,5 +3,5 @@ layout: default
 title: Welcome
 ---
 
-- [My docs]({{ site.baseurl }}/docs/my-docs/)
+- [CI CD Užduotis]({{ site.baseurl }}/docs/my-docs/)
 
