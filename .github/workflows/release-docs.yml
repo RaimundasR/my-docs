@@ -85,7 +85,6 @@ jobs:
         run: |
           gem install jekyll bundler minima
           echo "theme: minima" > _config_theme.yml
-          echo "baseurl: \"/test-docs/${{ github.event.inputs.version }}\"" > _config_release.yml
           jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site
           touch _site/.nojekyll
 
@@ -118,6 +117,6 @@ jobs:
           name: Docs ${{ github.event.inputs.version }}
           body: |
             🗂️ View the documentation at:
-            👉 https://raimundasr.github.io/test-docs/${{ github.event.inputs.version }}/
+            👉 https://raimundasr.github.io/my-docs/${{ github.event.inputs.version }}/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
