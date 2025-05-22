@@ -11,11 +11,11 @@
 <meta property="og:description" content="My Jekyll automation" />
 <meta property="og:site_name" content="My Docs Site" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-05-22T15:45:41+00:00" />
+<meta property="article:published_time" content="2025-05-22T16:06:24+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="My docs and findings" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-22T15:45:41+00:00","datePublished":"2025-05-22T15:45:41+00:00","description":"My Jekyll automation","headline":"My docs and findings","mainEntityOfPage":{"@type":"WebPage","@id":"/my-docs/preview/docs/my-docs/"},"url":"/my-docs/preview/docs/my-docs/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-22T16:06:24+00:00","datePublished":"2025-05-22T16:06:24+00:00","description":"My Jekyll automation","headline":"My docs and findings","mainEntityOfPage":{"@type":"WebPage","@id":"/my-docs/preview/docs/my-docs/"},"url":"/my-docs/preview/docs/my-docs/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/my-docs/preview/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/my-docs/preview/feed.xml" title="My Docs Site" /></head>
 <body><header class="site-header" role="banner">
@@ -151,20 +151,19 @@
           <span class="s">jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml -d _site</span>
           <span class="s">touch _site/.nojekyll</span>
 
-
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Deploy to gh-pages/preview/</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">peaceiris/actions-gh-pages@v4</span>
         <span class="na">with</span><span class="pi">:</span>
-          <span class="na">github_token</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">github_token</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
           <span class="na">publish_branch</span><span class="pi">:</span> <span class="s">gh-pages</span>
           <span class="na">publish_dir</span><span class="pi">:</span> <span class="s">./_site</span>
           <span class="na">destination_dir</span><span class="pi">:</span> <span class="s">preview</span>
 
-</code></pre></div></div>
 
-<h4 id="githubworkflowsrelease-docsyml"><code class="language-plaintext highlighter-rouge">.github/workflows/release-docs.yml</code></h4>
+<span class="c1">#### `.github/workflows/release-docs.yml`</span>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Manual Doc Release</span>
+<span class="err">```</span><span class="s">yaml</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">Manual Doc Release</span>
 
 <span class="na">on</span><span class="pi">:</span>
   <span class="na">workflow_dispatch</span><span class="pi">:</span>
