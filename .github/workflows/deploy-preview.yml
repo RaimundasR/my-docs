@@ -26,7 +26,7 @@ jobs:
           gem install jekyll bundler minima
           echo "theme: minima" > _config_theme.yml
           echo "baseurl: \"/test-docs/preview\"" > _config_preview.yml
-          jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml -d _site && touch _site/.nojekyll
+          jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml -d _site
           touch _site/.nojekyll
 
       - name: Deploy to gh-pages/preview/
