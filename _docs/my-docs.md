@@ -94,6 +94,7 @@ baseurl: "/my-docs/doc-0.0.1"
 
 #### `.github/workflows/deploy-preview.yml`
 
+{% raw %}
 ```yaml
 name: Deploy Preview (develop)
 
@@ -125,7 +126,6 @@ jobs:
           jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml -d _site
           touch _site/.nojekyll
 
-
       - name: Deploy to gh-pages/preview/
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -133,8 +133,7 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./_site
           destination_dir: preview
-
-```
+{% endraw %}
 
 #### `.github/workflows/release-docs.yml`
 
