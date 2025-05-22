@@ -1,8 +1,8 @@
 ---
 title: My docs and findings
 nav_order: 1
-layout: default
 has_children: true
+layout: default
 ---
 
 ## My Jekyll automation
