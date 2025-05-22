@@ -84,7 +84,6 @@ jobs:
       - name: Install Jekyll and minima theme
         run: |
           gem install jekyll bundler minima
-          echo "theme: minima" > _config_theme.yml
           jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site
           touch _site/.nojekyll
 
