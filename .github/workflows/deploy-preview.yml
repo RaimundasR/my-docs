@@ -37,6 +37,3 @@ jobs:
           publish_dir: ./_site
           destination_dir: preview
 
-      - name: If you would like to check Preview URL
-        run: echo "::notice title=Preview URL::🔗 https://raimundasr.github.io/test-docs/preview/"
-
