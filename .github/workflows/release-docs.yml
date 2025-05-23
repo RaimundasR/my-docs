@@ -31,30 +31,21 @@ jobs:
       - name: Build site with release config
         run: |
           echo "baseurl: \"/my-docs/${{ github.event.inputs.version }}\"" > _config_release.yml
-          bundle exec jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site
+          bundle exec jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d site_tmp
+
+      - name: Prepare deploy folder
+        run: |
+          mkdir -p _site/${{ github.event.inputs.version }}
+          cp -r site_tmp/* _site/${{ github.event.inputs.version }}
+          echo "<meta http-equiv='refresh' content='0; url=./${{ github.event.inputs.version }}/?v=${{ github.run_number }}'>" > _site/index.html
           touch _site/.nojekyll
 
-      - name: Deploy versioned docs to /${{ github.event.inputs.version }}
+      - name: Deploy versioned docs + root redirect
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./_site
-          destination_dir: ${{ github.event.inputs.version }}
-          keep_files: true
-
-      - name: Create redirect to latest version at root
-        run: |
-          mkdir redirect
-          echo "<meta http-equiv='refresh' content='0; url=./${{ github.event.inputs.version }}/?v=${{ github.run_number }}'>" > redirect/index.html
-
-
-      - name: Deploy root redirect (index.html)
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: ./redirect
           destination_dir: .
           keep_files: true
 
