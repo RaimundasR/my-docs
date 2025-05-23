@@ -1,7 +1,14 @@
 {"0": {
-    "doc": "Welcome",
-    "title": "Welcome",
+    "doc": "Devops tasks",
+    "title": "Documents BKA",
     "content": ". | CI CD Užduotis | . ",
+    "url": "/my-docs/preview/#documents-bka",
+    
+    "relUrl": "/#documents-bka"
+  },"1": {
+    "doc": "Devops tasks",
+    "title": "Devops tasks",
+    "content": " ",
     "url": "/my-docs/preview/",
     
     "relUrl": "/"
