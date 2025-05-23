@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies
         run: bundle install
 
-     - name: Build site with release config
+      - name: Build site with release config
         run: |
           echo "baseurl: \"/my-docs/${{ github.event.inputs.version }}\"" > _config_release.yml
           bundle exec jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site
