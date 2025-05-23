@@ -31,21 +31,22 @@ jobs:
       - name: Build site with release config
         run: |
           echo "baseurl: \"/my-docs/${{ github.event.inputs.version }}\"" > _config_release.yml
-          bundle exec jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d site_tmp
-
-      - name: Prepare deploy folder
-        run: |
-          mkdir -p _site/${{ github.event.inputs.version }}
-          cp -r site_tmp/* _site/${{ github.event.inputs.version }}
-          echo "<meta http-equiv='refresh' content='0; url=./${{ github.event.inputs.version }}/?v=${{ github.run_number }}'>" > _site/index.html
+          bundle exec jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site
           touch _site/.nojekyll
 
-      - name: Deploy versioned docs + root redirect
+      - name: Prepare deployment structure
+        run: |
+          mkdir deploy
+          cp -r _site deploy/${{ github.event.inputs.version }}
+          cp -r _site deploy/latest
+          echo "<meta http-equiv='refresh' content='0; url=./latest/?v=${{ github.run_number }}'>" > deploy/index.html
+
+      - name: Deploy version, latest, and root redirect
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./_site
+          publish_dir: ./deploy
           destination_dir: .
           keep_files: true
 
@@ -55,7 +56,10 @@ jobs:
           tag_name: ${{ github.event.inputs.version }}
           name: Docs ${{ github.event.inputs.version }}
           body: |
-            🗂️ View the documentation at:
+            🗂️ View versioned docs:
             👉 https://raimundasr.github.io/my-docs/${{ github.event.inputs.version }}/
+
+            🔗 Or always latest:
+            👉 https://raimundasr.github.io/my-docs/latest/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
