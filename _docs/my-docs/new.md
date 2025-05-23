@@ -1,8 +1,8 @@
 ---
-parent: My docs and findings
+parent: CI CD Užduotis
 title: New child page
 
-nav_order: 2
+nav_order: 1
 layout: page
 ---
 
