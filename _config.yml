@@ -10,6 +10,7 @@ collections:
   docs:
     output: true
     permalink: /:collection/:name/
+    sort_by: nav_order
 
 defaults:
   - scope:
