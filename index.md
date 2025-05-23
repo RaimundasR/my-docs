@@ -6,4 +6,4 @@ nav_order: 1
 
 # 👋 Welcome
 
-- [DevOps Tasks](docs/my-docs/)
+- [CI CD Užduotis]({{ site.baseurl }}/docs/my-docs/)
