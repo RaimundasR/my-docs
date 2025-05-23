@@ -1,2 +1,16 @@
-{
+{"0": {
+    "doc": "Home",
+    "title": "👋 Welcome",
+    "content": ". | DevOps Tasks | . ",
+    "url": "/my-docs/preview/#-welcome",
+    
+    "relUrl": "/#-welcome"
+  },"1": {
+    "doc": "Home",
+    "title": "Home",
+    "content": " ",
+    "url": "/my-docs/preview/",
+    
+    "relUrl": "/"
+  }
 }
