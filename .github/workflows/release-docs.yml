@@ -46,7 +46,8 @@ jobs:
       - name: Create redirect to latest version at root
         run: |
           mkdir redirect
-          echo '<meta http-equiv="refresh" content="0; url=./${{ github.event.inputs.version }}/">' > redirect/index.html
+          echo "<meta http-equiv='refresh' content='0; url=./${{ github.event.inputs.version }}/?v=${{ github.run_number }}'>" > redirect/index.html
+
 
       - name: Deploy root redirect (index.html)
         uses: peaceiris/actions-gh-pages@v4
