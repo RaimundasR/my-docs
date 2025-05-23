@@ -259,21 +259,15 @@ git push -u origin develop
 
 * Peržiūrai (preview):
 
-  ```
-  ```
-
 [https://your\_username.github.io/my-docs/preview/](https://your_username.github.io/my-docs/preview/)
 
 ```
-
 - Versijai (release):
 ```
 
 [https://your\_username.github.io/my-docs/doc-0.0.1/](https://your_username.github.io/my-docs/doc-0.0.1/)
 
 ```
-
 Sėkmės automatizuojant dokumentaciją! ✨
-
 ```
 
