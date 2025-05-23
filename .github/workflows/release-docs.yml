@@ -34,7 +34,7 @@ jobs:
           bundle exec jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site
           touch _site/.nojekyll
 
-      - name: Deploy versioned docs
+      - name: Deploy versioned docs to /${{ github.event.inputs.version }}
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -48,7 +48,7 @@ jobs:
           mkdir redirect
           echo '<meta http-equiv="refresh" content="0; url=./${{ github.event.inputs.version }}/">' > redirect/index.html
 
-      - name: Deploy redirect index.html to root
+      - name: Deploy root redirect (index.html)
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
