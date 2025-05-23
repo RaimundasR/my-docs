@@ -25,16 +25,14 @@ jobs:
           bundler: "2.4.22"
           bundler-cache: true
 
+
       - name: Install dependencies
         run: bundle install
 
-      - name: Build site with release config
+      - name: Build site with preview config
         run: |
-          echo "remote_theme: just-the-docs/just-the-docs" > _config_theme.yml
-          echo "baseurl: \"/my-docs/${{ github.event.inputs.version }}\"" > _config_release.yml
-          bundle exec jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site
+          bundle exec jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml -d _site
           touch _site/.nojekyll
-          echo '<meta http-equiv="refresh" content="0; url=./${{ github.event.inputs.version }}/">' > _site/index.html
 
       - name: Deploy full site (with root redirect)
         uses: peaceiris/actions-gh-pages@v4
