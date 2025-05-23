@@ -17,3 +17,7 @@ defaults:
       type: docs
     values:
       layout: default
+
+
+just_the_docs:
+  search_enabled: true
