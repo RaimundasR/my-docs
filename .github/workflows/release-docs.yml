@@ -29,10 +29,13 @@ jobs:
       - name: Install dependencies
         run: bundle install
 
-      - name: Build site with preview config
+      - name: Build site with release config
         run: |
-          bundle exec jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml -d _site
+          echo "baseurl: \"/my-docs/${{ github.event.inputs.version }}\"" > _config_release.yml
+          bundle exec jekyll build --config _config.yml,_config_theme.yml,_config_release.yml -d _site
+          echo '<meta http-equiv="refresh" content="0; url=./${{ github.event.inputs.version }}/">' > _site/index.html
           touch _site/.nojekyll
+
 
       - name: Deploy full site (with root redirect)
         uses: peaceiris/actions-gh-pages@v4
