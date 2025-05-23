@@ -1,8 +1,9 @@
 ---
-title: New Page
 parent: My docs and findings
+title: New child page
+
 nav_order: 2
-layout: default
+layout: page
 ---
 
 {% include toc.md %}
