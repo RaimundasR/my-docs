@@ -5,6 +5,8 @@ has_children: true
 layout: default
 siteNav: true
 ---
+{% include toc.md %}
+
 # 🧪 Praktinė užduotis: Docker Swarm klasterio kūrimas ir testavimas
 
 ## 🌟 Tikslas
