@@ -394,8 +394,6 @@ projektas/
 ├── app2/
 │   ├── Dockerfile
 │   └── package.json
-└── nginx/
-    └── nginx.conf
 ```
 
 ---
