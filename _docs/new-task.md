@@ -1,3 +1,10 @@
+---
+title: Konteinerizacija ir jos valdymas užduotis
+nav_order: 2
+has_children: true
+layout: default
+siteNav: true
+---
 # 🧪 Praktinė užduotis: Docker Swarm klasterio kūrimas ir testavimas
 
 ## 🌟 Tikslas
