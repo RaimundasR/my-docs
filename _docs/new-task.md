@@ -176,7 +176,7 @@ docker service create \
 
 ---
 
-<!-- ## 6️⃣ Load balancer (NGINX)
+## 6️⃣ Load balancer (NGINX)
 
 Master node:
 
@@ -197,48 +197,27 @@ sudo nano /etc/nginx/sites-available/default
 
 Rekomenduojamas turinys (jei Swarm serviso DNS neveikia, naudok IP vietoj pavadinimo):
 
-````nginx
-# Pvz. jei worker-01 turi IP 10.19.0.11 ir worker-02 turi IP 10.19.0.12
+```
 upstream node1 {
-  server 10.19.0.11:8081;
+  server worker-01:8080;
 }
 
 upstream node2 {
-  server 10.19.0.12:8082;
+  server worker-02:8080;
 }
 
 server {
   listen 80;
 
   location /node1 {
-    proxy_pass http://node1;
+    proxy_pass http://node1/;
   }
 
   location /node2 {
-    proxy_pass http://node2;
+    proxy_pass http://node2/;
   }
 }
-```nginx
-upstream node1 {
-  server nginx1:80;
-}
-
-upstream node2 {
-  server nginx2:80;
-}
-
-server {
-  listen 80;
-
-  location /node1 {
-    proxy_pass http://node1;
-  }
-
-  location /node2 {
-    proxy_pass http://node2;
-  }
-}
-````
+```
 
 3. Sukurk simbolinę nuorodą, jei reikia:
 
@@ -301,4 +280,4 @@ Perkrovus puslapį, turinys gali kisti – veikia **round-robin load balancing**
 * Palaiko automatinį paskirstymą, atkūrimą ir tinklo izoliaciją.
 * Puikiai tinka testavimui, mokymuisi ar mažiems klasteriams.
 
---- -->
+---
