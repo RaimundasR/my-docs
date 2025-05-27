@@ -190,6 +190,7 @@ sudo apt install nginx -y
 
 ```bash
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
+sudo rm /etc/nginx/sites-available/default
 sudo nano /etc/nginx/sites-available/default
 ```
 
