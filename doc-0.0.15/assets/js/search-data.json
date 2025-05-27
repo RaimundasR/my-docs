@@ -1,7 +1,14 @@
 {"0": {
-    "doc": "Welcome",
-    "title": "Welcome",
-    "content": ". | CI CD Užduotis | . ",
+    "doc": "Home",
+    "title": "👋 Welcome",
+    "content": ". | CI CD Užduotis | Konteinerizacija ir jos valdymas užduotis | . ",
+    "url": "/my-docs/doc-0.0.15/#-welcome",
+    
+    "relUrl": "/#-welcome"
+  },"1": {
+    "doc": "Home",
+    "title": "Home",
+    "content": " ",
     "url": "/my-docs/doc-0.0.15/",
     
     "relUrl": "/"
