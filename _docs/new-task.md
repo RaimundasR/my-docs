@@ -160,7 +160,7 @@ docker service create \
   --replicas 2 \
   --network my_net \
   --constraint 'node.hostname==worker-01' \
-  raimundas0106/nginx1
+  tavo_vartotojas(arba_projektas)/nginx1
 ```
 
 ### Worker 2:
@@ -171,7 +171,7 @@ docker service create \
   --replicas 2 \
   --network my_net \
   --constraint 'node.hostname==worker-02' \
-  nginx2
+  tavo_vartotojas(arba_projektas)/nginx2
 ```
 
 ---
