@@ -11,7 +11,7 @@ siteNav: true
 
 ## 🌟 Tikslas
 
-Sukurti Docker Swarm klasterį, paskirstyti konteinerius tarp VM, sukonfigūruoti `overlay` tinklą ir patikrinti automatizuotą apkrovos balansavimą (load balancing).
+Sukurti Docker Swarm klasterį, paskirstyti konteinerius tarp VM, sukonfigūruoti `overlay` tinklą 
 
 ---
 
@@ -104,7 +104,7 @@ docker service create \
 
 ---
 
-## 6️⃣ Load balancer (NGINX)
+<!-- ## 6️⃣ Load balancer (NGINX)
 
 Master node:
 
@@ -164,4 +164,4 @@ Perkrovus puslapį, turinys gali kisti – veikia **round-robin load balancing**
 * Palaiko automatinį paskirstymą, atkūrimą ir tinklo izoliaciją.
 * Puikiai tinka testavimui, mokymuisi ar mažiems klasteriams.
 
----
+--- -->
