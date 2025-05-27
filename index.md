@@ -1,8 +1,12 @@
 ---
-title: documents
 layout: default
-title: Welcome
+title: Home
+nav_enabled: true
 ---
 
+
+
+# 👋 Welcome
+
 - [CI CD Užduotis]({{ site.baseurl }}/docs/my-docs/)
-<!-- - [CI CD Užduotis 2]({{ site.baseurl }}/docs/new-task/) -->
+- [Konteinerizacija ir jos valdymas užduotis]({{ site.baseurl }}/docs/new-task/)
