@@ -387,13 +387,14 @@ app1/
 ```
 
 ```
-projektas/
-├── app1/
-│   ├── Dockerfile
-│   └── package.json
-├── app2/
-│   ├── Dockerfile
-│   └── package.json
+app2/
+├── Dockerfile
+├── package.json
+├── public/
+│   └── index.html
+└── src/
+    ├── App.vue
+    └── main.js
 ```
 
 ---
