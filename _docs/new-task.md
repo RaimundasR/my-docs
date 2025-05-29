@@ -176,7 +176,7 @@ docker service create \
 
 ---
 
-<!-- ## 6️⃣ Load balancer (NGINX)
+## 6️⃣ Load balancer (NGINX)
 
 Master node:
 
@@ -190,6 +190,7 @@ sudo apt install nginx -y
 
 ```bash
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
+sudo rm /etc/nginx/sites-available/default
 sudo nano /etc/nginx/sites-available/default
 ```
 
@@ -197,48 +198,27 @@ sudo nano /etc/nginx/sites-available/default
 
 Rekomenduojamas turinys (jei Swarm serviso DNS neveikia, naudok IP vietoj pavadinimo):
 
-````nginx
-# Pvz. jei worker-01 turi IP 10.19.0.11 ir worker-02 turi IP 10.19.0.12
+```
 upstream node1 {
-  server 10.19.0.11:8081;
+  server worker-01:8080;
 }
 
 upstream node2 {
-  server 10.19.0.12:8082;
+  server worker-02:8080;
 }
 
 server {
   listen 80;
 
   location /node1 {
-    proxy_pass http://node1;
+    proxy_pass http://node1/;
   }
 
   location /node2 {
-    proxy_pass http://node2;
+    proxy_pass http://node2/;
   }
 }
-```nginx
-upstream node1 {
-  server nginx1:80;
-}
-
-upstream node2 {
-  server nginx2:80;
-}
-
-server {
-  listen 80;
-
-  location /node1 {
-    proxy_pass http://node1;
-  }
-
-  location /node2 {
-    proxy_pass http://node2;
-  }
-}
-````
+```
 
 3. Sukurk simbolinę nuorodą, jei reikia:
 
@@ -301,4 +281,264 @@ Perkrovus puslapį, turinys gali kisti – veikia **round-robin load balancing**
 * Palaiko automatinį paskirstymą, atkūrimą ir tinklo izoliaciją.
 * Puikiai tinka testavimui, mokymuisi ar mažiems klasteriams.
 
---- -->
+---
+
+
+# 🧪 Užduotis: Sukurti ir paleisti dvi Vue.js Docker aplikacijas (`app1`, `app2`) bei pasiekti jas per NGINX reverse proxy
+
+Šios užduoties tikslas — sukurti dvi skirtingas Vue.js aplikacijas, kiekvieną paleisti atskirame Docker konteineryje kaip Swarm `service`, ir per NGINX sukonfigūruoti jų pasiekiamumą per `/app1` ir `/app2` kelius naršyklėje.
+
+---
+
+## 📁 1. Projektų struktūra
+
+```
+projektas/
+├── app1/
+│   ├── Dockerfile
+│   └── package.json
+├── app2/
+│   ├── Dockerfile
+│   └── package.json
+└── nginx/
+    └── nginx.conf
+```
+
+---
+
+# 🧪 Užduotis: Sukurti ir paleisti dvi Vue.js Docker aplikacijas (`app1`, `app2`) bei pasiekti jas per NGINX reverse proxy
+
+Šios užduoties tikslas — sukurti dvi skirtingas Vue.js aplikacijas, kiekvieną paleisti atskirame Docker konteineryje kaip Swarm `service`, ir per NGINX sukonfigūruoti jų pasiekiamumą per `/app1` ir `/app2` kelius naršyklėje.
+
+---
+
+## 📁 1. Projektų struktūra
+
+### 🛠 Privalomi failai kiekviename app kataloge
+
+#### 1️⃣ Įsitikink, kad `app1/` (ir `app2/`) struktūra atrodo taip:
+
+```
+app1/
+├── Dockerfile
+├── package.json
+├── public/
+│   └── index.html
+└── src/
+    ├── App.vue
+    └── main.js
+```
+
+#### 2️⃣ Sukurk minimalią `src/main.js` versiją:
+
+```js
+import { createApp } from 'vue'
+import App from './App.vue'
+
+createApp(App).mount('#app')
+```
+
+#### 3️⃣ `src/App.vue` turinys:
+
+```vue
+<template>
+  <h1>Labas iš App 1 🎉</h1>
+</template>
+
+<script>
+export default {
+  name: 'App'
+}
+</script>
+```
+
+#### 4️⃣ Nepamiršk `public/index.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="utf-8">
+  <title>App1</title>
+</head>
+<body>
+  <div id="app"></div>
+</body>
+</html>
+```
+
+> ✅ Įsitikink, kad kiekvienas `app1/` ir `app2/` katalogas turi būtinus failus, kad `npm run build` sėkmingai veiktų:
+>
+> * `src/main.js` – pagrindinis JS įėjimo taškas
+> * `src/App.vue` – komponento failas
+> * `public/index.html` – HTML šablonas
+
+Pavyzdys:
+
+```
+app1/
+├── Dockerfile
+├── package.json
+├── public/
+│   └── index.html
+└── src/
+    ├── App.vue
+    └── main.js
+```
+
+```
+app2/
+├── Dockerfile
+├── package.json
+├── public/
+│   └── index.html
+└── src/
+    ├── App.vue
+    └── main.js
+```
+
+---
+
+## 📦 2. `package.json` turinys (`app1` ir `app2` kataloguose)
+
+> 🧩 Šis failas būtinas, nes `docker build` vykdo `npm install` ir `npm run build`. Jis turi apibrėžti visas reikalingas priklausomybes ir `build` skriptą.(`app1` ir `app2` kataloguose)
+
+> Nepamiršk į `App.vue` faile įrašyti skirtingą tekstą, kad aplikacijos skirtųsi.
+
+```json
+{
+  "name": "vue-docker-app",
+  "version": "1.0.0",
+  "description": "Vue.js aplikacija Docker multi-stage aplinkai",
+  "scripts": {
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^5.0.0"
+  }
+}
+```
+
+---
+
+## 🐳 3. `Dockerfile` turinys (`app1` ir `app2` kataloguose)
+
+```dockerfile
+# build etapas
+FROM node:lts-alpine as build-stage
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# production etapas
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+---
+
+## 🔨 4. Docker image kūrimas iš `app1/` ir `app2/` katalogų
+
+> 📝 **Pastaba**: `docker build` metu gali pasirodyti `npm WARN deprecated` žinutės dėl pasenusių priklausomybių. Tai **ne trukdžiai**, o tik įspėjimai. Jei reikia, priklausomybes galima atnaujinti vėliau.
+
+### 🪟 Langas 1 – Sukurk image iš `app1/` katalogo:
+
+```bash
+docker build -t vue-app1 ./app1
+```
+
+### 🪟 Langas 2 – Sukurk image iš `app2/` katalogo:
+
+```bash
+docker build -t vue-app2 ./app2
+```
+
+---
+
+## 🧪 5. Sukurti paslaugas Docker Swarm aplinkoje
+
+### 🪟 Langas 1 – App 1:
+
+```bash
+docker service create \
+  --name vue-app1 \
+  --replicas 3 \
+  --network my_net \
+  --publish published=8083,target=80 \
+  --constraint 'node.hostname==worker-01' \
+  vue-app1
+```
+
+### 🪟 Langas 2 – App 2:
+
+```bash
+docker service create \
+  --name vue-app2 \
+  --replicas 3 \
+  --network my_net \
+  --publish published=8084,target=80 \
+  --constraint 'node.hostname==worker-02' \
+  vue-app2
+```
+
+---
+
+## 🌐 5. NGINX konfigūracija su papildomais `upstream`
+
+`nginx/nginx.conf` faile pridėk šiuos `upstream`:
+
+```nginx
+upstream node1 {
+  server worker-01:8081;
+}
+
+upstream node2 {
+  server worker-02:8080;
+}
+
+upstream app1 {
+  server worker-01:8083;
+}
+
+upstream app2 {
+  server worker-02:8084;
+}
+
+server {
+  listen 80;
+
+  location /node1 {
+    proxy_pass http://node1/;
+  }
+
+  location /node2 {
+    proxy_pass http://node2/;
+  }
+
+  location /app1 {
+    proxy_pass http://app1/;
+  }
+
+  location /app2 {
+    proxy_pass http://app2/;
+  }
+}
+```
+
+---
+
+## ✅ 7. Patikrink naršyklėje
+
+* [http://localhost/app1](http://localhost/app1) → turėtų rodyti App 1
+* [http://localhost/app2](http://localhost/app2) → turėtų rodyti App 2
+
+---
+
+🎉 Viskas paruošta! Dvi Vue.js aplikacijos veikia atskiruose Docker konteineriuose kaip Swarm paslaugos, o jų pasiekiamumą reguliuoja NGINX proxy.
