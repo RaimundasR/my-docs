@@ -144,7 +144,11 @@ http {
     }
 }
 ```
+### Paleisti service
 
+```
+docker stack deploy -c deploy-green-blue.yml  nginx
+```
 ---
 
 ## 🔁 Pasirinktinai: Swarm CronJob Integracija
