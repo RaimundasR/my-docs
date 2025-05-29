@@ -147,7 +147,7 @@ http {
 ### Paleisti service
 
 ```
-docker stack deploy -c deploy-green-blue.yml  nginx
+docker stack deploy -c deploy-stack.yml  nginx
 ```
 ---
 
