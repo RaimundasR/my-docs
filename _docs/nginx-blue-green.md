@@ -148,6 +148,11 @@ http {
 }
 ```
 
+### Paleisti service
+
+```yml
+docker stack deploy -c deploy-stack.yml  nginx
+```
 **Pastaba:** Vietoje `tasks.*` naudotas paslaugos vardas `nginx-blue`, `nginx-green` kartu su `resolver 127.0.0.11`, kuris užtikrina, kad NGINX visada naudoja tik aktyvius konteinerius, išvengiant `no route to host` po atnaujinimų.
 
 ---
