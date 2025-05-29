@@ -13,6 +13,14 @@ siteNav: true
 Šiame skyriuje aprašomas būdas, kaip pakeisti tradicinę "round-robin" atnaujinimo strategiją į **aktyvaus–pasyvaus (blue-green)** modelį naudojant `containrrr/shepherd`, `Docker Swarm` ir `NGINX` kaip reverse proxy.
 
 ---
+## Failų struktųra
+```
+root@master-swarm:~/infra-green-blue# tree
+.
+├── deploy-green-blue.yml
+└── nginx
+    └── nginx.conf
+```
 
 ## 🎯 Tikslas
 

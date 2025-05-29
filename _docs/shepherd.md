@@ -12,6 +12,26 @@ siteNav: true
 Šis gidas paaiškina, kaip sukonfigūruoti [containrrr/shepherd](https://github.com/containrrr/shepherd), kad Docker Swarm paslaugos būtų automatiškai atnaujinamos naudojant autentifikuotą prisijungimą prie DockerHub.
 
 ---
+## Failų struktųra
+
+Docker tag nustatysime v1. pvz:
+
+```bash
+docker build -t nginx1:v1  ./worker1/nginx
+docker tag nginx1:v1  <your_repo>>/nginx1:v1
+docker push  <your_repo>>/nginx1:v1
+```
+
+
+```
+root@master-swarm:~/infra-stack#
+.
+├── docker-stack.yml
+├── docker-stack.yml_bac
+└── nginx
+    └── nginx.conf
+```
+---
 
 ## 📦 Docker Compose Stack
 
