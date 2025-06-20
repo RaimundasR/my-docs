@@ -1,7 +1,7 @@
 {"0": {
     "doc": "Home",
     "title": "👋 Welcome",
-    "content": ". | CI CD Užduotis | Konteinerizacija ir jos valdymas užduotis | Shepherd DockerHub Autentifikacija su Swarm Sąranka | Blue-Green Strategija su Shepherd ir NGINX Docker Swarm’e | Docker Hub Cloud Build su GitHub Actions | raktinių darbų su swarm ir dockerhub diagramos | Blue/Green Deploy naudojant GitLab Container Registry ir Shepherd | . ",
+    "content": ". | CI CD Užduotis | Konteinerizacija ir jos valdymas užduotis | Shepherd DockerHub Autentifikacija su Swarm Sąranka | Blue-Green Strategija su Shepherd ir NGINX Docker Swarm’e | Docker Hub Cloud Build su GitHub Actions | raktinių darbų su swarm ir dockerhub diagramos | Blue/Green Deploy naudojant GitLab Container Registry ir Shepherd | N8N Diegimas k8s | . ",
     "url": "/my-docs/doc-0.0.18/#-welcome",
     
     "relUrl": "/#-welcome"
