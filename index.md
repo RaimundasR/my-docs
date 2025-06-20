@@ -15,3 +15,4 @@ nav_enabled: true
 - [Docker Hub Cloud Build su GitHub Actions]({{ site.baseurl }}/docs/dockerhub/)
 - [raktinių darbų su swarm ir dockerhub diagramos]({{ site.baseurl }}/docs/workshop-diagrams/)
 - [Blue/Green Deploy naudojant GitLab Container Registry ir Shepherd]({{ site.baseurl }}/docs/gitlab-registry/)
+- [N8N Diegimas k8s]({{ site.baseurl }}/docs/n8n/)
