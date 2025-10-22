@@ -1,7 +1,7 @@
-# Documentation Automation Toolkit – Setup and Guide
+# Documentation Automation Repository – Setup and Configuration Guide
 
 ## Overview / Purpose
-This repository provides a structured approach to automating the generation and deployment of documentation using Jekyll, with a focus on CI/CD integration through GitHub Actions. It utilizes Ruby and several Jekyll plugins to create documentation sites that can be automatically built and deployed to GitHub Pages. Key features include support for multiple configurations (preview and release), and integration with Docker and GitLab for container deployment.
+This repository is designed to automate the process of creating, managing, and deploying documentation websites using Jekyll. Leveraging continuous integration and deployment (CI/CD) with GitHub Actions, this project facilitates the building of documentation for software projects, enabling easy versioning and deployment. The primary technologies used include Jekyll for static site generation, Docker for containerization, and Helm for Kubernetes deployment.
 
 ## File Tree
 ```
@@ -10,100 +10,98 @@ This repository provides a structured approach to automating the generation and 
 ├── _config_release.yml
 ├── _config_theme.yml
 ├── _config.yml
-├── _docs/dockerhub.md
-├── _docs/gitlab-registry.md
-├── _docs/index.md
-├── _docs/my-docs.md
-├── _docs/my-docs/new.md
-├── _docs/n8n.md
-├── _docs/new-task.md
-├── _docs/nginx-blue-green.md
-├── _docs/shepherd.md
-├── _docs/workshop-diagrams.md
-├── _includes/toc.md
-├── .github/workflows/CODEOWNERS
-├── .github/workflows/deploy-preview.yml
-├── .github/workflows/release-docs.yml
-├── Gemfile
-├── index.md
+├── _docs/dockerhub.md  # Docker Hub Cloud Build documentation
+├── _docs/gitlab-registry.md  # Blue/Green Deploy using GitLab Container Registry
+├── _docs/index.md  # Landing page for the documentation site
+├── _docs/my-docs.md  # Primary documentation guide
+├── _docs/my-docs/new.md  # Child page of the primary documentation
+├── _docs/n8n.md  # Deployment guide for n8n in Kubernetes
+├── _docs/new-task.md  # Practical task for creating a Docker Swarm cluster
+├── _docs/nginx-blue-green.md  # Blue-Green deployment strategy with NGINX and Docker Swarm
+├── _docs/shepherd.md  # Documentation for using Shepherd with Docker Swarm
+├── _docs/workshop-diagrams.md  # ASCII diagrams for practical tasks
+├── _includes/toc.md  # Table of contents for documentation pages
+├── .github/workflows/CODEOWNERS  # Ownership rules for GitHub workflows
+├── .github/workflows/deploy-preview.yml  # Workflow for deploying preview documentation
+├── .github/workflows/release-docs.yml  # Manual documentation release workflow
+├── Gemfile  # Dependencies for Jekyll and plugins
+├── index.md  # Main page of the site
 ```
 
 ## Directory & File Descriptions
-- `_config_preview.yml`  # Configuration file for preview builds.
-- `_config_release.yml`  # Configuration file for release builds.
-- `_config_theme.yml`  # Configuration file for theme settings.
-- `_config.yml`  # Main configuration file for Jekyll site.
-- `_docs/dockerhub.md`  # Documentation for Docker Hub integration with GitHub Actions.
-- `_docs/gitlab-registry.md`  # Guide for blue-green deployment using GitLab Container Registry and Shepherd.
-- `_docs/index.md`  # Main index page for documentation site.
-- `_docs/my-docs.md`  # Detailed guide on configuring and using the documentation framework.
-- `_docs/my-docs/new.md`  # Child page for additional documentation.
-- `_docs/n8n.md`  # Guide for deploying n8n in Kubernetes.
-- `_docs/new-task.md`  # Practical task related to Docker Swarm and container management.
-- `_docs/nginx-blue-green.md`  # Instructions on implementing blue-green deployment strategies with NGINX.
-- `_docs/shepherd.md`  # Configuration guide for Shepherd in Docker.
-- `_docs/workshop-diagrams.md`  # Diagrams related to practical tasks in Swarm and Docker Hub.
-- `_includes/toc.md`  # Table of Contents for documentation pages.
-- `.github/workflows/CODEOWNERS`  # Configuration for repository code ownership.
-- `.github/workflows/deploy-preview.yml`  # GitHub Actions workflow for deploying preview builds.
-- `.github/workflows/release-docs.yml`  # GitHub Actions workflow for manually releasing documentation.
-- `Gemfile`  # Defines Ruby gems used for managing dependencies.
-- `index.md`  # Homepage for the documentation site.
+- `_config_preview.yml`  # Configuration for preview deployment
+- `_config_release.yml`  # Configuration for release deployment
+- `_config_theme.yml`  # Theme configuration for the Jekyll site
+- `_config.yml`  # Primary configuration file for Jekyll site
+- `_docs/dockerhub.md`  # Docker Hub Cloud Build documentation
+- `_docs/gitlab-registry.md`  # Guide for Blue/Green deploy using GitLab
+- `_docs/index.md`  # Landing page for the documentation site
+- `_docs/my-docs.md`  # Primary documentation guide
+- `_docs/my-docs/new.md`  # Child page of the primary documentation
+- `_docs/n8n.md`  # Deployment guide for n8n in Kubernetes
+- `_docs/new-task.md`  # Practical task for Docker Swarm cluster creation
+- `_docs/nginx-blue-green.md`  # Blue-Green deployment strategy guide
+- `_docs/shepherd.md`  # Documentation for using Shepherd
+- `_docs/workshop-diagrams.md`  # ASCII diagrams for practical guidance
+- `_includes/toc.md`  # Table of contents for all documentation pages
+- `.github/workflows/CODEOWNERS`  # Defines repository management roles
+- `.github/workflows/deploy-preview.yml`  # CI workflow for deploying documentation previews
+- `.github/workflows/release-docs.yml`  # Manual workflow for releasing documentation
+- `Gemfile`  # Specifies dependencies for the Jekyll site
+- `index.md`  # Main entry point of the documentation
 
 ## Setup / Installation / Deployment
-1. **Clone the Repository**
+1. **Clone the Repository**: 
    ```
    git clone https://github.com/<your_username>/my-docs.git
    cd my-docs
    ```
 
-2. **Install Dependencies**
-   Ensure you have Ruby and Bundler installed, then run:
+2. **Install Dependencies**:
+   Ensure you have Ruby and Bundler installed. Then run:
    ```
    bundle install
    ```
 
-3. **Build the Documentation Site**
-   You can build the documentation for different environments, e.g.:
-   ```
-   bundle exec jekyll build --config _config.yml,_config_theme.yml,_config_preview.yml
-   ```
-
-4. **Configure GitHub Actions for CI/CD**
-   - Update the repository settings in GitHub for the GitHub Actions workflows.
-   - Ensure `GITHUB_TOKEN` secret is configured in your repository for deployment workflows.
-
-## Usage
-- To start a local development server:
+3. **Build the Jekyll Site**:
+   To build the site locally, use:
    ```
    bundle exec jekyll serve
    ```
-- Access the local site via `http://localhost:4000`.
 
-- For deploying preview versions, push to the `develop` branch to trigger the `deploy-preview.yml` workflow or manually trigger the `release-docs.yml` workflow for documentation release.
+4. **Setup GitHub Secrets**:
+   For CI/CD to work, add necessary GitHub secrets under repository settings. Example secrets might include `DOCKER_USER` and `DOCKER_PAT`.
+
+5. **Deploy the Site**: Push changes to the `develop` branch to trigger the deployment workflows, or manually run the workflow for releases.
+
+## Usage
+- To serve the documentation locally, execute the command:
+  ```
+  bundle exec jekyll serve
+  ```
+  The documentation will be available at `http://localhost:4000`.
+
+- For deploying latest documentation to GitHub Pages, use the CI/CD workflow defined in `.github/workflows/release-docs.yml`.
 
 ## Configuration / Environment
-- **Environment Variables**: Ensure the following GitHub secrets are set up for successful deployments:
-   - `GITHUB_TOKEN`: Token for authentication in GitHub actions.
-   - Docker Hub credentials if using Docker workflows.
+### Dependencies
+- Ruby: 3.1
+- Jekyll: 4.3.2
+- Bundler: 2.4.22
+- GitHub Actions for CI/CD
   
-- **Dependencies**: 
-   - Ruby >= 3.1
-   - Bundler >= 2.4.22
-   - Jekyll >= 4.3.2
+### Configuration Files
+- `_config.yml`: Main configuration for Jekyll site.
+- `_config_preview.yml`: Configuration specific for preview deployments.
+- `_config_release.yml`: Configuration for release versioning.
 
 ## Troubleshooting
-- If the site does not build, verify that all required gems are installed by running `bundle install`.
-- Common issues can arise from incorrect paths in configuration files. Ensure paths are accurate relative to the repository root.
+- **Local Server Issues**: If Jekyll fails to serve the site, verify that all dependencies are installed correctly.
+- **GitHub Actions Failures**: Check repository settings for missing secrets or incorrect configurations.
 
 ## Automation / CI-CD / Scripts
-The repository employs GitHub Actions for CI/CD:
-- **CODEOWNERS** file defines repository ownership to manage reviews.
-- **Workflow files**:
-  - `deploy-preview.yml`: Automatically deploys changes to the GitHub pages when pushing to the `develop` branch.
-  - `release-docs.yml`: Manages the release process when triggered manually.
+### GitHub Workflows
+- **Deploy Preview**: The `deploy-preview.yml` workflow automatically builds and deploys the documentation whenever changes are pushed to the `develop` branch.
+- **Release Docs**: The `release-docs.yml` allows for manual releases, prompting for version input to manage documentation versions effectively.
 
-Ensure you have the appropriate permissions configured in the repository settings to enable these workflows to run successfully.
-
-```
-```
+This project allows for streamlined documentation management, providing a straightforward framework for continuous integration and deployment of documentation websites. Follow the provided guidelines to effectively set up, configure, and deploy your Jekyll-based documentation easily.
