@@ -1,4 +1,3 @@
-```
 # Documentation Automation Repository – CI/CD and Container Management Guide
 
 ## Overview / Purpose
@@ -59,18 +58,18 @@ This repository serves as a comprehensive guide for automating documentation and
 ## Setup / Installation / Deployment
 To set up this project:
 1. **Clone the Repository**:
-   ```bash
+   ```
    git clone https://github.com/yourusername/your-repo.git
    cd your-repo
    ```
 2. **Install Dependencies**:
    Ensure you have Ruby and Bundler installed, then run:
-   ```bash
+   ```
    bundle install
    ```
 3. **Run the Jekyll Server**:
    To preview the site locally:
-   ```bash
+   ```
    bundle exec jekyll serve
    ```
 
@@ -106,5 +105,3 @@ The repository implements two GitHub Actions workflows:
 2. **release-docs.yml**: Can be manually triggered to build and deploy the documentation site upon version change.
 
 These workflows automate the process using Ruby, Jekyll, and GitHub's built-in CI features, thus allowing for seamless documentation updates and deployments.
-
-```
