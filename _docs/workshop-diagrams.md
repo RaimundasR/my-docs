@@ -1,10 +1,10 @@
 ---
 
 title: Praktinių darbų su swarm ir dockerhub diagramos 
-nav\_order: 6
+nav_order: 6
 layout: default
 siteNav: true
--------------
+---
 
 ## Praktinių darbų ASCII tipo diagramos
 
