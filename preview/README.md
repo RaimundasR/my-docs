@@ -1,7 +1,7 @@
-# CI/CD Automation for Documentation – Setup and Usage Guide
+# CI/CD Documentation Automation – Setup and Usage Guide
 
 ## Overview / Purpose
-This repository aims to provide a robust solution for automating the build, deployment, and management of documentation using Jekyll and GitHub Actions. It facilitates a seamless CI/CD process for documentation, ensuring that any changes made to the codebase are automatically reflected in the published documentation hosted on GitHub Pages. The repository leverages technologies such as Jekyll for static site generation, Ruby for dependency management, and GitHub Actions for workflow automation.
+This repository provides a comprehensive solution for automating the generation, deployment, and management of documentation using Jekyll and GitHub Actions. It streamlines a CI/CD pipeline for documentation, ensuring that all changes in the codebase are automatically reflected in the documentation hosted on GitHub Pages. Key technologies utilized include Jekyll for static site generation, Ruby for dependency fulfillment, and GitHub Actions for continuous integration and deployment automation.
 
 ## File Tree
 ```
@@ -30,18 +30,19 @@ This repository aims to provide a robust solution for automating the build, depl
 ├── _config_theme.yml  # theme configuration for Jekyll
 ├── _config.yml  # main configuration for Jekyll site
 ├── Gemfile  # Ruby Gem dependencies for the project
-└── index.md  # home/index page of the documentation
+├── index.md  # home/index page of the documentation
+└── README.md  # project overview and documentation guide
 ```
 
 ## Directory & File Descriptions
-- `_docs`: Contains all the documentation markdown files.
-- `_includes`: Holds reusable code snippets and components like the table of contents.
-- `.github/workflows`: GitHub Actions workflows for CI/CD automation.
-- `_config_preview.yml`: Configuration specific for building the preview versions.
-- `_config_release.yml`: Configuration specific for building the release versions.
-- `_config_theme.yml`: Configuration settings for the Jekyll theme.
-- `_config.yml`: The main Jekyll site configuration.
-- `Gemfile`: Specifies the Ruby gems required for the project.
+- `_docs`: Contains all the markdown files for documentation.
+- `_includes`: Stores reusable code snippets and components such as the table of contents.
+- `.github/workflows`: Holds GitHub Actions workflows for automating CI/CD processes.
+- `_config_preview.yml`: Jekyll configuration settings specific to preview deployments.
+- `_config_release.yml`: Jekyll configuration settings specific to release deployments.
+- `_config_theme.yml`: Theme settings for the Jekyll site.
+- `_config.yml`: The main Jekyll site configuration file.
+- `Gemfile`: Lists the Ruby gems required for the project dependencies.
 - `index.md`: The main landing page for the documentation site.
 
 ## Setup / Installation / Deployment
@@ -54,48 +55,48 @@ To set up and deploy this documentation site, follow these steps:
    ```
 
 2. **Install Ruby and Bundler**:
-   Ensure you have Ruby installed. You can install Bundler using:
+   Ensure Ruby is installed. Use the following command to install Bundler:
    ```
    gem install bundler
    ```
 
 3. **Install dependencies**:
-   Run the following command in the project root:
+   Run the following command in the root directory of the project:
    ```
    bundle install
    ```
 
 4. **Build the documentation site**:
-   To build the site locally, run:
+   To build the site locally, execute:
    ```
    bundle exec jekyll serve
    ```
    This will start a local server at `http://localhost:4000`.
 
 5. **Deploy the site**:
-   The deployment is automated using GitHub Actions. Push changes to the `develop` branch to trigger a preview deployment or manually trigger a release via the `Manual Doc Release` workflow outlined in the GitHub Actions configuration.
+   Automated deployment occurs via GitHub Actions. Push changes to the `develop` branch for preview deployment, or manually trigger the release workflow via the GitHub Actions configuration.
 
 ## Usage
-Once the setup is complete, you can create or edit markdown files in the `_docs` directory. Upon committing the changes, the GitHub Actions will handle the deployment, making your documentation available to users.
+Once the setup is complete, you can create or edit markdown files in the `_docs` directory. After committing and pushing those changes, GitHub Actions will handle deployments, making the updated documentation accessible to users.
 
-To view your documentation locally, visit `http://localhost:4000` after running the Jekyll server.
+To view your documentation locally, navigate to `http://localhost:4000` after starting the Jekyll server.
 
 ## Configuration / Environment
-- **Environment Variables**: Ensure that any necessary environment variables (like `GITHUB_TOKEN` for deployment) are set in your GitHub repository settings.
-- **Dependencies**: 
+- **Environment Variables**: Ensure all necessary variables (like `GITHUB_TOKEN` for deployments) are set in your GitHub repository settings.
+- **Dependencies**:
   - Ruby (version 3.1)
   - Bundler (version 2.4.22)
   - Jekyll (version 4.3.2)
-  - Various other Jekyll plugins specified in the Gemfile.
+  - Additional Jekyll plugins specified in the Gemfile.
 
 ## Troubleshooting
-- If the website does not compile or display correctly, check for errors in your markdown files.
-- Ensure that the GitHub Environment secrets are properly configured for deployments.
-- Check whether the proper Ruby version is being used and that all dependencies are installed correctly by running `bundle install`.
+- If the website does not compile or display correctly, verify for errors in markdown files.
+- Ensure that GitHub secrets are properly configured for deployments.
+- Confirm that the correct Ruby version is being used and all dependencies are installed by executing `bundle install`.
 
 ## Automation / CI/CD / Scripts
-The repository includes several GitHub Actions workflows:
-- **Deploy Preview Workflow** (`deploy-preview.yml`): Automatically builds and deploys the documentation site to a preview URL whenever changes are pushed to the `develop` branch.
-- **Manual Release Workflow** (`release-docs.yml`): Allows manual triggering of the documentation release process, specifying a version for the release, which includes building and deploying the documentation to the GitHub Pages.
+This repository includes several GitHub Actions workflows:
+- **Deploy Preview Workflow** (`deploy-preview.yml`): Automatically builds and deploys documentation to a preview URL when changes are pushed to the `develop` branch.
+- **Manual Release Workflow** (`release-docs.yml`): Supports manual triggering of documentation releases, specifying the version for deployment, which includes building and deploying the documentation to GitHub Pages.
 
-By following these guidelines, you can efficiently manage your documentation project using a structured CI/CD workflow, ensuring timely updates and seamless deployment processes for your users.
+By adhering to these guidelines, you can effectively manage your documentation project using a structured CI/CD workflow, ensuring rapid updates and seamless deployment processes.
