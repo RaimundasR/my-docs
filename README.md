@@ -100,6 +100,3 @@ This repository includes several GitHub Actions workflows:
 - **Manual Release Workflow** (`release-docs.yml`): Supports manual triggering of documentation releases, specifying the version for deployment, which includes building and deploying the documentation to GitHub Pages.
 
 By adhering to these guidelines, you can effectively manage your documentation project using a structured CI/CD workflow, ensuring rapid updates and seamless deployment processes.
-
-```
-```
