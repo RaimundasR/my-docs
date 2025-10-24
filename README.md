@@ -1,7 +1,7 @@
 # CI/CD Documentation Automation – Setup and Usage Guide
 
 ## Overview / Purpose
-This repository provides a comprehensive solution for automating the generation, deployment, and management of documentation using Jekyll and GitHub Actions. It streamlines a CI/CD pipeline for documentation, ensuring that all changes in the codebase are automatically reflected in the documentation hosted on GitHub Pages. Key technologies utilized include Jekyll for static site generation, Ruby for dependency fulfillment, and GitHub Actions for continuous integration and deployment automation.
+This repository serves as a comprehensive solution for automating the generation, deployment, and management of documentation using Jekyll and GitHub Actions. It effectively streamlines a CI/CD pipeline, ensuring that all changes in the codebase are automatically reflected in the documentation hosted on GitHub Pages. Key technologies utilized include Jekyll for static site generation, Ruby for dependency management, and GitHub Actions for continuous integration and deployment automation.
 
 ## File Tree
 ```
@@ -77,7 +77,7 @@ To set up and deploy this documentation site, follow these steps:
    Automated deployment occurs via GitHub Actions. Push changes to the `develop` branch for preview deployment, or manually trigger the release workflow via the GitHub Actions configuration.
 
 ## Usage
-Once the setup is complete, you can create or edit markdown files in the `_docs` directory. After committing and pushing those changes, GitHub Actions will handle deployments, making the updated documentation accessible to users.
+Once setup is complete, you can create or edit markdown files in the `_docs` directory. After committing and pushing those changes, GitHub Actions will handle deployments, making the updated documentation accessible to users.
 
 To view your documentation locally, navigate to `http://localhost:4000` after starting the Jekyll server.
 
@@ -97,7 +97,7 @@ To view your documentation locally, navigate to `http://localhost:4000` after st
 ## Automation / CI/CD / Scripts
 This repository includes several GitHub Actions workflows:
 - **Deploy Preview Workflow** (`deploy-preview.yml`): Automatically builds and deploys documentation to a preview URL when changes are pushed to the `develop` branch.
-- **Manual Release Workflow** (`release-docs.yml`): Supports manual triggering of documentation releases, specifying the version for deployment, which includes building and deploying the documentation to GitHub Pages.
+- **Manual Release Workflow** (`release-docs.yml`): Supports manual triggering of documentation releases, allowing you to specify the version for deployment, which includes building and deploying the documentation to GitHub Pages.
 
 By adhering to these guidelines, you can effectively manage your documentation project using a structured CI/CD workflow, ensuring rapid updates and seamless deployment processes.
 ```
