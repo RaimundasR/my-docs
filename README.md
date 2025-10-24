@@ -1,41 +1,43 @@
 # Documentation Automation and CI/CD Framework – Setup and Usage Guide
 
 ## Overview / Purpose
-This repository serves as a robust framework for automating documentation deployment using GitHub Actions and Jekyll. It is tailored for generating, publishing, and maintaining documentation sites with version control. Utilizing technologies such as Jekyll for static site generation, GitHub Actions for CI/CD workflows, and Docker for containerization, this project simplifies the documentation process while ensuring easy collaboration and version tracking.
+This repository serves as a robust framework for automating documentation deployment using GitHub Actions and Jekyll. It is designed to generate, publish, and maintain documentation sites with version control. The project leverages technologies such as Jekyll for static site generation, GitHub Actions for CI/CD workflows, and Ruby for packaging dependencies, simplifying the documentation process while ensuring collaborative version tracking.
 
 ## File Tree
 ```
 .
 ├── _docs
 │   ├── my-docs
-│   │   └── new.md
-│   ├── dockerhub.md
-│   ├── gitlab-registry.md
-│   ├── index.md
-│   ├── my-docs.md
-│   ├── n8n.md
-│   ├── new-task.md
-│   ├── nginx-blue-green.md
-│   ├── shepherd.md
-│   └── workshop-diagrams.md
+│   │   └── new.md  # new child documentation page
+│   ├── dockerhub.md  # guide for Docker Hub cloud build automation
+│   ├── gitlab-registry.md  # Blue/Green deployment instructions using GitLab
+│   ├── index.md  # overview and navigation for the documentation site
+│   ├── my-docs.md  # main documentation section detailing Jekyll automation
+│   ├── n8n.md  # guide for deploying n8n in Kubernetes
+│   ├── new-task.md  # practical task guidelines for Docker Swarm
+│   ├── nginx-blue-green.md  # information on Blue-Green strategy with NGINX
+│   ├── shepherd.md  # overview of using Shepherd with Docker Swarm for auto-updating services
+│   └── workshop-diagrams.md  # ASCII diagrams for practical tasks involving Docker and Swarm
 ├── _includes
-│   └── toc.md
+│   └── toc.md  # reusable table of contents for navigation
 ├── github
 │   └── workflows
-│       ├── CODEOWNERS
-│       ├── deploy-preview.yml
-│       └── release-docs.yml
-├── _config_preview.yml
-├── _config_release.yml
-├── _config_theme.yml
-├── _config.yml
-├── Gemfile
-└── index.md
+│       ├── CODEOWNERS  # specifies code reviewers for repository changes
+│       ├── deploy-preview.yml  # workflow to build and deploy previews
+│       └── release-docs.yml  # manual workflow for releasing documentation versions
+├── _config_preview.yml  # configuration for preview builds of the documentation
+├── _config_release.yml  # configuration for released documentation versions
+├── _config_theme.yml  # theme configuration for Jekyll documentation site
+├── _config.yml  # main configuration file for Jekyll
+├── Gemfile  # Ruby dependency management file
+├── index.md  # serves as the entry point for the documentation site
+├── README.md  # this README file
+└── text.txt  # test file to print content
 ```
 
 ## Directory & File Descriptions
-- `_docs/`: Directory containing all documentation files.
-  - `my-docs/`: Contains child documentation files for specific projects.
+- `_docs/`: Contains all documentation files.
+  - `my-docs/`: Project-specific documentation files.
   - `dockerhub.md`: Guide for Docker Hub automation using GitHub Actions.
   - `gitlab-registry.md`: Instructions for Blue/Green deployment with GitLab.
   - `index.md`: Overview and navigation for the documentation site.
@@ -116,6 +118,3 @@ This repository serves as a robust framework for automating documentation deploy
   - The `deploy-preview.yml` is triggered on pushes to the `develop` branch, automatically building and deploying the preview of the documentation.
   - The `release-docs.yml` allows for manual triggering to prepare a specific versioned release, publishing to GitHub Pages.
 - These workflows ensure that changes in documentation are automatically reflected on the live site without manual intervention, streamlining the deployment process.
-
-```
-```
